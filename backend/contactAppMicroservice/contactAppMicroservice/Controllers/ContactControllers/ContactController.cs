@@ -16,7 +16,7 @@ namespace contactAppMicroservice.Controllers.Contact
         [HttpGet]
         public async Task<ActionResult<List<ContactResponse>>> getAllContacts()
         {
-            var contactsResponse = await contactService.getAllContacts();
+            var contactsResponse = await contactService.getAllContactsAsync();
 
             if (contactsResponse is null || contactsResponse.Count == 0)
                 return NotFound();
@@ -27,7 +27,7 @@ namespace contactAppMicroservice.Controllers.Contact
         [HttpGet("{ContactId}")]
         public async Task<ActionResult<ContactDetailsResponse>> getContactById(Guid ContactId)
         {
-            var contactDetailsResponse = await contactService.getContactById(ContactId);
+            var contactDetailsResponse = await contactService.getContactByIdAsync(ContactId);
 
             if (contactDetailsResponse is null)
                 return NotFound();
@@ -44,7 +44,7 @@ namespace contactAppMicroservice.Controllers.Contact
                 return BadRequest(ModelState);
             }
 
-            var result = await contactService.deleteContact(ContactId, deleteContactRequest.Password);
+            var result = await contactService.deleteContactAsync(ContactId, deleteContactRequest.Password);
 
             if (!result) return BadRequest("Invalid password or contact id");
 
@@ -62,7 +62,7 @@ namespace contactAppMicroservice.Controllers.Contact
 
             try
             {
-                var result = await contactService.addNewContact(contactRequest);
+                var result = await contactService.addNewContactAsync(contactRequest);
                 return CreatedAtAction(nameof(getContactById), new { result.ContactId }, result);
             }
             catch (ArgumentException ex)
@@ -82,7 +82,7 @@ namespace contactAppMicroservice.Controllers.Contact
 
             try
             {
-                await contactService.updateContact(contactId, contactRequest);
+                await contactService.updateContactAsync(contactId, contactRequest);
                 return NoContent();
             }
             catch (ArgumentException ex)
