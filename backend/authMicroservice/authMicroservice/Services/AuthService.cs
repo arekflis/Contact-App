@@ -27,7 +27,7 @@ namespace authMicroservice.Services
             return await createLoginResponse(user);
         }
 
-        public async Task<bool?> registerAsync(RegisterRequest registerRequest)
+        public async Task<bool> registerAsync(RegisterRequest registerRequest)
         {
             if (await authDbContext.Users.AnyAsync(u => u.Email == registerRequest.Email))
             {
