@@ -57,7 +57,7 @@ namespace contactAppMicroservice.Database
                 Category = category,
                 CategoryId = category.CategoryId
             };
-            
+
             contactDbContext.Subcategories.Add(subcategory);
             await contactDbContext.SaveChangesAsync();
         }

@@ -1,11 +1,12 @@
-﻿using contactAppMicroservice.DTO.Request;
+﻿using AutoMapper;
+using contactAppMicroservice.DTO.Request;
 using contactAppMicroservice.DTO.Response;
-using contactAppMicroservice.Services;
+using contactAppMicroservice.Services.ContactServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace contactAppMicroservice.Controllers
+namespace contactAppMicroservice.Controllers.Contact
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -48,6 +49,46 @@ namespace contactAppMicroservice.Controllers
             if (!result) return BadRequest("Invalid password or contact id");
 
             return Ok("Contact successfully deleted");
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult<ContactDetailsResponse>> addNewContact(ContactRequest contactRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await contactService.addNewContact(contactRequest);
+                return CreatedAtAction(nameof(getContactById), new { result.ContactId }, result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPut("{contactId}")]
+        public async Task<IActionResult> updateContact(Guid contactId, ContactRequest contactRequest)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await contactService.updateContact(contactId, contactRequest);
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
