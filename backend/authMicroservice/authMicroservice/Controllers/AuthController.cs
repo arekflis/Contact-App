@@ -42,7 +42,7 @@ namespace authMicroservice.Controllers
             var result = await authService.loginAsync(loginRequest);
 
             if (result is null) 
-                return BadRequest("Invalid username or password.");
+                return BadRequest("Invalid email or password.");
 
             return Ok(result);
         }

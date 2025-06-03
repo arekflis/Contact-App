@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace contactAppMicroservice.Database
 {
-    public class ConctactAppDbContext(DbContextOptions<ConctactAppDbContext> options): DbContext(options)
+    public class ContactDbContext(DbContextOptions<ContactDbContext> options): DbContext(options)
     {
         public DbSet<Contact> Contacts => Set<Contact>();
         public DbSet<Category> Categories => Set<Category>();

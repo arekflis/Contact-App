@@ -11,7 +11,7 @@ namespace contactAppMicroservice.Entities
         public string Email { get; set; } = string.Empty;
         public string PasswordHash {  get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
         
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
