@@ -1,0 +1,13 @@
+<div class="container">
+    <h2>Usuwanie kontaktu</h2>
+    <form (ngSubmit)="onSubmit()">
+        
+        <label for="password">Potwierdź hasło:</label>
+        <input [(ngModel)]="password" name="password" type="password" id="password" placeholder="Hasło" required>
+
+        <button type="submit">Usuń kontakt</button>
+    </form>
+
+    <button [routerLink]="['/contact', contactId]">Wróć</button>
+    <button routerLink="/contacts">Przejdź do kontaktów</button>
+</div>

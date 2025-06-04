@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Logowanie</h2>
+    <form (ngSubmit)="onSubmit()">
+        
+        <label for="email">Adres e-mail:</label>
+        <input [(ngModel)]="email" name="email" type="email" id="email" placeholder="Adres e-mail" required>
+
+        <label for="password">Hasło:</label>
+        <input [(ngModel)]="password" name="password" type="password" id="password" placeholder="Hasło" required>
+
+        <button type="submit">Zaloguj</button>
+    </form>
+
+    <button routerLink="/register">Załóż konto</button>
+    <button routerLink="/contacts">Przejdź do kontaktów</button>
+</div>

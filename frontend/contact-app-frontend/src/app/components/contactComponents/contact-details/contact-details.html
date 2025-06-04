@@ -1,0 +1,45 @@
+<div class="main-container">
+    <h2>Kontakt: </h2>
+    <table *ngIf="contact">
+        <thead>
+            <th>Atrybut</th>
+            <th>Wartość</th>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Imię</th>
+                <td>{{contact.firstName}}</td>
+            </tr>
+            <tr>
+                <th>Nazwisko</th>
+                <td>{{contact.lastName}}</td>   
+            </tr>
+            <tr>
+                <th>Telefon</th>
+                <td>{{contact.phoneNumber}}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{contact.email}}</td>   
+            </tr>
+
+            <tr>
+                <th>Data urodzenia</th>
+                <td>{{contact.dateOfBirth}}</td>   
+            </tr>
+            <tr>
+                <th>Kategoria</th>
+                <td>{{contact.category.name}}</td>
+            </tr>
+            <tr *ngIf="contact.subcategory">
+                <th>Podkategoria</th>
+                <td>{{contact.subcategory.name}}</td>   
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="buttons-container">
+        <button [routerLink]="['/contact/delete', contact?.contactId]" *ngIf="(isLoggedIn$ | async)">Usuń kontakt</button>
+        <button routerLink="/contacts">Przejdź do kontaktów</button>
+    </div>
+</div>
