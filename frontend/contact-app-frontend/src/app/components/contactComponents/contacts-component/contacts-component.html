@@ -6,6 +6,7 @@
             <th>Nazwisko</th>
             <th>Telefon</th>
             <th>Szczegóły</th>
+            <th *ngIf="(isLoggedIn$ | async)">Edycja</th>
         </thead>
         <tbody>
             <tr *ngFor="let contact of contacts">
@@ -15,10 +16,15 @@
                 <td>
                     <button [routerLink]="['/contact', contact.contactId]">Szczegóły</button>
                 </td>
+                <td *ngIf="(isLoggedIn$ | async)">
+                    <button [routerLink]="['/contact/edit', contact.contactId]">Edytuj</button>
+                </td>
             </tr>
             <tr *ngIf="contacts.length === 0">
                 <td colspan="4">Brak kontaktów</td>
             </tr>
         </tbody>
     </table>
+
+    <button class="add-button" routerLink="/contact/add" *ngIf="(isLoggedIn$ | async)">Dodaj kontakt</button>
 </div>

@@ -27,6 +27,7 @@ export class ContactDetails {
 
     ngOnInit(): void {
       const contactId = this.route.snapshot.paramMap.get('id');
+      
       if (contactId) {
         this.contactService.getContactDetails(contactId).subscribe({
           next: (response) => this.contact = response,

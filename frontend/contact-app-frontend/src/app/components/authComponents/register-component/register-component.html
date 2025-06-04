@@ -1,15 +1,28 @@
 <div class="container">
     <h2>Rejestracja</h2>
-    <form (ngSubmit)="onSubmit()">
-        
-        <label for="email">Adres e-mail:</label>
-        <input [(ngModel)]="email" name="email" type="email" id="email" placeholder="Adres e-mail" required>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="email">Email:</label>
+            <input id="email" formControlName="email" />
+            <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)" class="error">
+                <div *ngIf="registrationForm.get('email')?.errors?.['required']">Email jest wymagany.</div>
+                <div *ngIf="registrationForm.get('email')?.errors?.['email']">Nieprawidłowy format.</div>
+            </div>
+        </div>
 
-        <label for="password">Hasło:</label>
-        <input [(ngModel)]="password" name="password" type="password" id="password" placeholder="Hasło" required>
+        <div>
+            <label for="password">Hasło:</label>
+            <input id="password" type="password" formControlName="password" />
+            <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)" class="error">
+                <div *ngIf="registrationForm.get('password')?.errors?.['required']">Hasło jest wymagane.</div>
+                <div *ngIf="registrationForm.get('password')?.errors?.['minlength']"> Hasło musi mieć co najmniej 8 znaków.</div>
+                <div *ngIf="registrationForm.get('password')?.errors?.['pattern']">Hasło powinno zawierać małą, dużą literę oraz znak specjalny.</div>
+            </div>
+        </div>
 
-        <button type="submit">Załóż konto</button>
+        <button type="submit" [disabled]="registrationForm.invalid">Załóż konto</button>
     </form>
 
     <button routerLink="/contacts">Przejdź do kontaktów</button>
+    
 </div>

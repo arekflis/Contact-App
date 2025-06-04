@@ -3,6 +3,8 @@ import { ContactService } from '../../../services/contactService/contact-service
 import { Contact } from '../../../models/contactModels/Contact';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/authService/auth-service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-contacts-component',
@@ -12,7 +14,12 @@ import { RouterModule } from '@angular/router';
 })
 export class ContactsComponent {
 
-    constructor(private contactService: ContactService) { }
+    constructor(private contactService: ContactService,
+                private authService: AuthService) { 
+                  this.isLoggedIn$ = this.authService.isLoggedIn$;
+                }
+
+    isLoggedIn$ : Observable<boolean>;
 
     contacts: Contact[] = [];
 

@@ -15,3 +15,7 @@ th, td {
 th {
     background-color: #d7cece;
 }
+
+.add-button {
+    margin-top: 20px;
+}

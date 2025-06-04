@@ -1,13 +1,22 @@
 <div class="container">
     <h2>Usuwanie kontaktu</h2>
-    <form (ngSubmit)="onSubmit()">
-        
-        <label for="password">Potwierdź hasło:</label>
-        <input [(ngModel)]="password" name="password" type="password" id="password" placeholder="Hasło" required>
+    <form [formGroup]="deleteContactForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="password">Hasło:</label>
+            <input id="password" type="password" formControlName="password" />
+            <div *ngIf="deleteContactForm.get('password')?.invalid && (deleteContactForm.get('password')?.dirty || deleteContactForm.get('password')?.touched)" class="error">
+                <div *ngIf="deleteContactForm.get('password')?.errors?.['required']">Hasło jest wymagane.</div>
+                <div *ngIf="deleteContactForm.get('password')?.errors?.['minlength']"> Hasło musi mieć co najmniej 8 znaków.</div>
+                <div *ngIf="deleteContactForm.get('password')?.errors?.['pattern']">Hasło powinno zawierać małą, dużą literę oraz znak specjalny.</div>
+            </div>
+        </div>
 
-        <button type="submit">Usuń kontakt</button>
+        <button type="submit" [disabled]="deleteContactForm.invalid">Usuń kontakt</button>
     </form>
 
-    <button [routerLink]="['/contact', contactId]">Wróć</button>
-    <button routerLink="/contacts">Przejdź do kontaktów</button>
+    <div class="butttons-container">
+        <button [routerLink]="['/contact', contactId]">Wróć</button>
+        <button routerLink="/contacts">Przejdź do kontaktów</button>
+    </div>
+    
 </div>

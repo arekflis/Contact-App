@@ -12,9 +12,9 @@ input{
     width: 150px;
 }
 
-.buttons-container {
-    display: flex;
-    justify-content: center;
+select{
+    margin-bottom: 10px;
+    width: 150px;
 }
 
 button {
