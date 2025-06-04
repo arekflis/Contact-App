@@ -1,0 +1,29 @@
+.container{
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input{
+    margin-bottom: 10px;
+    width: 150px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin-top: 20px;
+    margin-inline: 10px;
+}
+
+div.error {
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}

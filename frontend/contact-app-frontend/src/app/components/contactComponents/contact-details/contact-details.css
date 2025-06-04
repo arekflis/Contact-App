@@ -1,0 +1,27 @@
+.main-container {
+    text-align: center;
+}
+
+table{
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px 12px;
+    border: 1px solid black;
+}
+
+th {
+    background-color: #d7cece;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin-top: 20px;
+    margin-inline: 10px;
+}

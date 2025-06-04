@@ -1,0 +1,7 @@
+<nav>
+    <ul>
+        <li><button routerLink="/login" *ngIf="!(isLoggedIn$ | async)">Zaloguj się</button></li>
+        <li><button routerLink="/register" *ngIf="!(isLoggedIn$ | async)">Załóż konto</button></li>
+        <li><button (click)="logout()" *ngIf="(isLoggedIn$ | async)">Wyloguj</button></li>
+    </ul>
+</nav>

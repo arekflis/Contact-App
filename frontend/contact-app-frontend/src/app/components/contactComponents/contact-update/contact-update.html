@@ -1,0 +1,86 @@
+<div class="container">
+    <h2>Aktualizuj kontakt</h2>
+    <form [formGroup]="editContactForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="firstName">Imię:</label>
+            <input id="firstName" formControlName="firstName" />
+            <div *ngIf="editContactForm.get('firstName')?.invalid && (editContactForm.get('firstName')?.dirty || editContactForm.get('firstName')?.touched)" class="error">
+                <div *ngIf="editContactForm.get('firstName')?.errors?.['required']">Imię jest wymagane.</div>
+                <div *ngIf="editContactForm.get('firstName')?.errors?.['maxlength']">Imię może mieć maksymalnie 20 znaków.</div>
+            </div>
+        </div>
+
+        <div>
+            <label for="lastName">Nazwisko:</label>
+            <input id="lastName" formControlName="lastName" />
+            <div *ngIf="editContactForm.get('lastName')?.invalid && (editContactForm.get('lastName')?.dirty || editContactForm.get('lastName')?.touched)" class="error">
+                <div *ngIf="editContactForm.get('lastName')?.errors?.['required']">Nazwisko jest wymagane.</div>
+                <div *ngIf="editContactForm.get('lastName')?.errors?.['maxlength']">Nazwisko może mieć maksymalnie 20 znaków.</div>
+            </div>
+        </div>
+        
+        <div>
+            <label for="email">Email:</label>
+            <input id="email" formControlName="email" />
+            <div *ngIf="editContactForm.get('email')?.invalid && (editContactForm.get('email')?.dirty || editContactForm.get('email')?.touched)" class="error">
+                <div *ngIf="editContactForm.get('email')?.errors?.['required']">Email jest wymagany.</div>
+                <div *ngIf="editContactForm.get('email')?.errors?.['email']">Nieprawidłowy format.</div>
+            </div>
+        </div>
+
+        <div>
+            <label for="phoneNumber">Numer telefonu:</label>
+            <input id="phoneNumber" formControlName="phoneNumber" />
+            <div *ngIf="editContactForm.get('phoneNumber')?.invalid && (editContactForm.get('phoneNumber')?.dirty || editContactForm.get('phoneNumber')?.touched)" class="error">
+                <div *ngIf="editContactForm.get('phoneNumber')?.errors?.['required']">Numer telefonu jest wymagany.</div>
+                <div *ngIf="editContactForm.get('phoneNumber')?.errors?.['pattern']">Nieprawidłowy format.</div>
+            </div>
+        </div>
+
+         <div>
+            <label for="dateOfBirth">Numer telefonu:</label>
+            <input id="dateOfBirth" type="date" formControlName="dateOfBirth" />
+            <div *ngIf="editContactForm.get('dateOfBirth')?.invalid && (editContactForm.get('dateOfBirth')?.dirty || editContactForm.get('dateOfBirth')?.touched)" class="error">
+                <div *ngIf="editContactForm.get('dateOfBirth')?.errors?.['required']">Data urodzenia jest wymagana.</div>
+            </div>
+        </div>
+
+        <div>
+            <label for="selectedCategory">Wybierz kategorię:</label>
+            <select id="selectedCategory" formControlName="selectedCategory" (change)="onCategoryChange()">
+                <option *ngFor="let category of categories" [value]="category.categoryId">
+                    {{ category.name }}
+                </option>
+            </select>
+        </div>
+
+        <div *ngIf="showSubcategorySelect">
+            <label for="selectedSubcategory">Wybierz podkategorię:</label>
+            <select id="selectedSubcategory" formControlName="selectedSubcategory">
+                <option *ngFor="let subcategory of subcategories" [value]="subcategory.subcategoryId">
+                    {{ subcategory.name }}
+                </option>
+            </select>
+        </div>
+
+        <div *ngIf="showSubcategoryInput">
+            <label for="subcategory">Podkategoria:</label>
+            <input id="subcategory" formControlName="subcategory" />
+        </div>
+
+        <div>
+            <label for="password">Wprowadź hasło, aby edytować kontakt:</label>
+            <input id="password" type="password" formControlName="password" />
+            <div *ngIf="editContactForm.get('password')?.invalid && (editContactForm.get('password')?.dirty || editContactForm.get('password')?.touched)" class="error">
+                <div *ngIf="editContactForm.get('password')?.errors?.['required']">Hasło jest wymagane.</div>
+                <div *ngIf="editContactForm.get('password')?.errors?.['minlength']"> Hasło musi mieć co najmniej 8 znaków.</div>
+                <div *ngIf="editContactForm.get('password')?.errors?.['pattern']">Hasło powinno zawierać małą, dużą literę oraz znak specjalny.</div>
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="editContactForm.invalid">Edytuj kontakt</button>
+    </form>
+
+    <button routerLink="/contacts">Przejdź do kontaktów</button>
+    
+</div>
