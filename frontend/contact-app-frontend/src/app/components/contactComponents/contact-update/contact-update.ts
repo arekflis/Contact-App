@@ -160,7 +160,7 @@ export class ContactUpdate {
 
     this.contactService.updateContact(this.contactId, contactRequest).subscribe({
       next: (response) => {
-        console.log('Contact added successfully:', response);
+        console.log(response);
         this.router.navigate(['/contacts']);
       },
       error: (error) => {

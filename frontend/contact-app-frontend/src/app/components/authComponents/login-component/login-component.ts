@@ -35,7 +35,7 @@ export class LoginComponent {
 
     this.authService.login(loginRequest).subscribe({
       next: (response) => {
-        this.authService.setAuthToken(response.token);
+        this.authService.setAuthToken(response.token, response.refreshToken);
         console.log('Login successful');
         this.router.navigate(['/contacts']);
       },
